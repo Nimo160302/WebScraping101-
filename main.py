@@ -8,25 +8,14 @@ soup = BeautifulSoup(href, 'lxml')
 table = soup.find('tbody')
 # print(jobs)
 rows = table.find_all('tr')
-# print(text)
 
 for row in rows:
-
     columns = row.find_all('td')
-    # rank = columns[-1]
-    # name =  columns[0]
-    # score = columns[-2]
-    print(columns)
-    print('\n')
+# When using find_all(), we can directly access the 'href' attribute using ['href']
+    if len(columns)>6:
+        rank = int(columns[-1].text)
+        name =  columns[1].text.split('More')[0]
+        score = columns[-2].text
+        stats_link = row.find_all('a', target= '_blank')[0]['href']
+        print(f'Rank : {rank}, College: {name}, score = {score} , stats_link ={stats_link}')
 
-    # if len(columns) >= 6:  # Ensuring the row has enough columns
-    #     institute_id = columns[0].text.strip()
-    #     institute_name = columns[1].text.strip()
-    #     city = columns[2].text.strip()
-    #     state = columns[3].text.strip()
-    #     score = columns[4].text.strip()
-    #     rank = columns[5].text.strip()
-    #
-    # print(f"{rank}, {name}  - Score: {score}")
-# table = jobs.find('tr', role =  'row')
-# print(table)
